@@ -22,6 +22,7 @@ gulp.task('sass', () => {
     .pipe($.autoprefixer({browsers: ['> 1%', 'last 2 versions', 'Firefox ESR']}))
     .pipe($.sourcemaps.write())
     .pipe(gulp.dest('.tmp/assets/css'))
+    .pipe(gulp.dest('assets/css'))
     .pipe(reload({stream: true}));
 });
 
@@ -35,6 +36,7 @@ gulp.task('js', () => {
     .pipe($.babel())
     .pipe($.sourcemaps.write('.'))
     .pipe(gulp.dest('.tmp/assets/js'))
+    .pipe(gulp.dest('assets/js'))
     .pipe(reload({stream: true}));
 });
 
@@ -68,7 +70,7 @@ gulp.task('html', ['sass', 'js'], () => {
     .pipe($.if('*.js', $.uglify()))
     .pipe($.if('*.css', $.cssnano()))
     .pipe($.if('*.html', $.htmlmin({collapseWhitespace: true})))
-    .pipe(gulp.dest('dist'));
+    .pipe(gulp.dest('./'));
 });
 
 /**
@@ -84,7 +86,7 @@ gulp.task('images', () => {
       svgoPlugins: [{cleanupIDs: false}]
     })))
     .pipe(gulp.dest('.tmp/assets/images'))
-    .pipe(gulp.dest('dist/assets/images'));
+    .pipe(gulp.dest('assets/images'));
 });
 
 /**
@@ -94,7 +96,7 @@ gulp.task('fonts', () => {
   return gulp.src(require('main-bower-files')('**/*.{eot,svg,ttf,woff,woff2}', function (err) {})
     .concat('app/assets/fonts/**/*'))
     .pipe(gulp.dest('.tmp/assets/fonts'))
-    .pipe(gulp.dest('dist/assets/fonts'));
+    .pipe(gulp.dest('assets/fonts'));
 });
 
 /**
@@ -106,7 +108,7 @@ gulp.task('extras', () => {
     '!app/*.html'
   ], {
     dot: true
-  }).pipe(gulp.dest('dist'));
+  }).pipe(gulp.dest('./'));
 });
 
 /**
@@ -149,7 +151,7 @@ gulp.task('serve:dist', () => {
     notify: false,
     port: 9000,
     server: {
-      baseDir: ['dist']
+      baseDir: ['./']
     }
   });
 });
