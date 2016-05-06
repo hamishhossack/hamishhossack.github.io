@@ -35,6 +35,8 @@
 	$delay-header:			$delay-overlay + _duration(overlay) - 0.75s;
 	$delay-nav-icons:		$delay-header + _duration(header) - 1s;
 	$delay-nav-icon:		0.25s;
+  $delay-content:			$delay-nav-icons + _duration(nav-icons) - 1s;
+  $delay-articles:		0.25s;
 
 /* Basic */
 
@@ -179,7 +181,8 @@
 		opacity: 0;
 		position: relative;
 		text-align: center;
-		top: 1em;
+		top: 3em;
+    height: 35em;
 		vertical-align: middle;
 		width: 90%;
 
@@ -265,6 +268,174 @@
 		}
 	}
 
+/* Content */
+  @include keyframes('content') {
+    0%		{ @include vendor('transform', 'translate3d(0,1em,0)'); opacity: 0; }
+    100%	{ @include vendor('transform', 'translate3d(0,0,0)'); opacity: 1; }
+  }
+
+  @include keyframes('articles') {
+    0%		{ @include vendor('transform', 'translate3d(0,1em,0)'); opacity: 0; }
+    100%	{ @include vendor('transform', 'translate3d(0,0,0)'); opacity: 1; }
+  }
+
+  $content-text-margin: 0.5em;
+
+  #content {
+    @include vendor('animation', 'content #{_duration(content)} #{$delay-content} forwards');
+    @include vendor('backface-visibility', 'hidden');
+    @include vendor('transform', 'translate3d(0,0,0)');
+    cursor: default;
+    display: inline-block;
+    opacity: 0;
+    position: relative;
+    text-align: center;
+    top: 1em;
+    vertical-align: middle;
+    width: 90%;
+    text-align: left;
+
+    .container {
+      @include clearfix();
+      margin-bottom: 2em;
+
+      > article {
+
+        &.half {
+          width: 50%;
+        }
+        &.full {
+          width: 100%;
+        }
+        float: left;
+
+        h2 {
+          font-size: 2.35em;
+          font-weight: 400;
+          text-transform: uppercase;
+          line-height: 1em;
+        }
+
+        ul {
+          text-align: center;
+
+          li {
+            display: inline-block;
+            padding: 0 1em;
+
+            i {
+              -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+              -webkit-touch-callout: none;
+              border: 0;
+              display: inline-block;
+
+              &:before {
+                @include vendor('transition', 'all 0.2s ease-in-out');
+                border-radius: 100%;
+                border: solid 1px _palette(fg);
+                display: block;
+                font-size: _size(nav-icon);
+                height: 2.5em;
+                line-height: 2.5em;
+                position: relative;
+                text-align: center;
+                top: 0;
+                width: 2.5em;
+              }
+
+              &:hover {
+                &:before {
+                  border: solid 1px _palette(nav-icon, hover-bg);
+                  background-color: _palette(nav-icon, hover-bg);
+                  color: _palette(nav-icon, hover-fg);
+                }
+              }
+
+              &:active {
+                font-size: 0.95em;
+                background: none;
+
+                &:before {
+                  background-color: _palette(nav-icon, active-bg);
+                  color: _palette(nav-icon, active-fg);
+                }
+              }
+
+              span {
+                display: none;
+              }
+            }
+          }
+        }
+
+        > section {
+
+          article {
+
+            h3 {
+              font-size: 1.35em;
+              font-weight: 400;
+              text-transform: uppercase;
+              line-height: 1em;
+
+              &:before {
+                content: '\2022';
+                font-weight: 600;
+                position: relative;
+                left: -0.15em;
+              }
+            }
+
+            h4 {
+              font-size: 1em;
+              font-weight: 400;
+              text-transform: uppercase;
+              letter-spacing: -0.035em;
+              line-height: 1em;
+              margin-left: $content-text-margin;
+            }
+
+            footer {
+              padding-bottom: 1em;
+              border-left: 1px solid _palette(border);
+
+              p {
+                margin-left: $content-text-margin;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+/* Process Bar */
+  .progressbar {
+    background-color: _palette(bg);
+    border: 2px solid _palette(mg);
+  }
+
+  .progressbar > div {
+    background-color: _palette(mg);
+    height: 20px;
+
+    &.html {
+      width: 90%;
+    }
+    &.javascript {
+      width: 85%;
+    }
+    &.php {
+      width: 70%;
+    }
+    &.css {
+      width: 90%;
+    }
+    &.cli {
+      width: 85%;
+    }
+  }
+
 /* Footer */
 
 	#footer {
@@ -275,7 +446,6 @@
 		height: 6em;
 		left: 0;
 		line-height: 8em;
-		position: absolute;
 		text-align: center;
 		width: 100%;
 	}

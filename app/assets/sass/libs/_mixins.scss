@@ -54,3 +54,12 @@
 	@return url("data:image/svg+xml;charset=utf8,#{$svg}");
 
 }
+
+// Clearfix on any element which requires misc sizing
+@mixin clearfix {
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
