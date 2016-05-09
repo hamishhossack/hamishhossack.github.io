@@ -367,7 +367,7 @@
 		}
 
 		input:checked + label {
-			color: _pallete(mg);
+			color: _palette(mg);
 			z-index: 6;
 			@include vendor('animation', 'page 0.2s linear');
 		}
@@ -425,7 +425,7 @@
 		}
 	}
 
-	@keyframes "page" {
+	@keyframes page {
 		0% {
 	    	left: 0;
 		}
