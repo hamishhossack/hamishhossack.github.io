@@ -30,7 +30,7 @@
     "gulp-uglify": "^1.5.4",
     "gulp-useref": "^3.1.6",
     "main-bower-files": "^2.13.3",
-    "wiredep": "^2.2.2"
+    "wiredep": "^4.0.0"
   },
   "eslintConfig": {
     "env": {
